@@ -1,0 +1,31 @@
+.userItem {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: box-shadow 0.2s ease;
+}
+
+.userItem:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.userName {
+    margin: 0 0 5px 0;
+}
+
+.userDetails {
+    font-size: 0.9em;
+    color: #555;
+}

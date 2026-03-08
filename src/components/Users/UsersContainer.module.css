@@ -1,0 +1,25 @@
+.container {
+    max-width: 100%;
+    margin: 20px auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+}
+
+.error {
+    color: #d9534f;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    border-radius: 4px;
+    padding: 15px;
+    text-align: center;
+}
+
+.notFound {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}
