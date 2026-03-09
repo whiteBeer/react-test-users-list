@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from '../../redux/users/usersThunk';
 import { selectUsers, selectUsersLoading, selectUsersError, selectUsersTotal } from '../../redux/users/usersSelector';
 import type { AppDispatch } from '../../redux/store';
 import { PAGE_SIZE } from '../../constants/global';
-import { useDebounce } from '../../hooks/useDebounce';
 import UsersItem from './UsersItem';
 import Pagination from '../Pagination';
 import Search from '../Search';
@@ -26,35 +25,13 @@ const UsersContainer = ({ currentPage, currentQuery, onPageChange, onSearchChang
     const error = useSelector(selectUsersError);
     const totalUsers = useSelector(selectUsersTotal);
 
-    const [searchTerm, setSearchTerm] = useState(currentQuery);
-    const [searchTermDebounced, cancelDebounce] = useDebounce(searchTerm, 500);
-
-    useEffect(() => {
-        setSearchTerm(currentQuery);
-    }, [currentQuery]);
-
-    useEffect(() => {
-        // handle for browser prev/next, do not need debounced search
-        if (searchTerm === currentQuery) {
-            cancelDebounce();
-            return;
-        }
-
-        onSearchChange(searchTermDebounced);
-
-        return () => {
-            cancelDebounce();
-        };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchTermDebounced, cancelDebounce]);
-
     useEffect(() => {
         dispatch(fetchUsers({ page: currentPage, query: currentQuery }));
     }, [dispatch, currentPage, currentQuery]);
 
     return (
         <div className={styles.container}>
-            <Search searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
+            <Search value={currentQuery} onSearchChange={onSearchChange}/>
             {loading && <div className={styles.loaderCont}><Loader/></div>}
             {error && <p className={styles.error}>Error: {error}</p>}
             {!error &&

@@ -9,24 +9,26 @@ const UsersPage = () => {
 
     const handlePageChange = (page: number) => {
         setSearchParams(prev => {
+            const next = new URLSearchParams(prev);
             if (page === 1) {
-                prev.delete('page');
+                next.delete('page');
             } else {
-                prev.set('page', String(page));
+                next.set('page', String(page));
             }
-            return prev;
+            return next;
         });
     };
 
     const handleSearchChange = (query: string) => {
         setSearchParams(prev => {
+            const next = new URLSearchParams(prev);
             if (query) {
-                prev.set('q', query);
+                next.set('q', query);
             } else {
-                prev.delete('q');
+                next.delete('q');
             }
-            prev.delete('page');
-            return prev;
+            next.delete('page');
+            return next;
         });
     };
 
