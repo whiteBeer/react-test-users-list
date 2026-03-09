@@ -34,6 +34,7 @@ const UsersContainer = ({ currentPage, currentQuery, onPageChange, onSearchChang
     }, [currentQuery]);
 
     useEffect(() => {
+        // handle for browser prev/next, do not need debounced search
         if (searchTerm === currentQuery) {
             cancelDebounce();
             return;
@@ -53,29 +54,29 @@ const UsersContainer = ({ currentPage, currentQuery, onPageChange, onSearchChang
 
     return (
         <div className={styles.container}>
-            <Search searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-            {loading && <Loader />}
+            <Search searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
+            {loading && <div className={styles.loaderCont}><Loader/></div>}
             {error && <p className={styles.error}>Error: {error}</p>}
-            {!loading && !error && (
-                <>
+            {!error &&
+                <div style={{visibility: loading ? 'hidden' : 'visible'}}>
                     {users.length > 0 ? (
                         <ul className={styles.list}>
                             {users.map((user) => (
-                                <UsersItem key={user.id} user={user} highlightText={currentQuery} />
+                                <UsersItem key={user.id} user={user} highlightText={currentQuery}/>
                             ))}
                         </ul>
                     ) : (
                         <p className={styles.notFound}>Users not found.</p>
                     )}
-                    {totalUsers > PAGE_SIZE && (
-                        <Pagination
-                            currentPage={currentPage}
-                            totalCount={totalUsers}
-                            pageSize={PAGE_SIZE}
-                            onPageChange={onPageChange}
-                        />
-                    )}
-                </>
+                </div>
+            }
+            {totalUsers > PAGE_SIZE && !error && (
+                <Pagination
+                    currentPage={currentPage}
+                    totalCount={totalUsers}
+                    pageSize={PAGE_SIZE}
+                    onPageChange={onPageChange}
+                />
             )}
         </div>
     );

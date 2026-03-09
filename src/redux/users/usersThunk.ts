@@ -8,6 +8,8 @@ interface FetchUsersParams {
     query: string;
 }
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 let fetchUsersController: AbortController | null = null;
 
 export const fetchUsers = ({ page, query }: FetchUsersParams) => async (dispatch: AppDispatch) => {
@@ -23,9 +25,9 @@ export const fetchUsers = ({ page, query }: FetchUsersParams) => async (dispatch
         
         let url: string;
         if (query) {
-            url = `https://dummyjson.com/users/search?q=${encodeURIComponent(query)}&limit=${limit}&skip=${skip}`;
+            url = `${backendUrl}/users/search?q=${encodeURIComponent(query)}&limit=${limit}&skip=${skip}`;
         } else {
-            url = `https://dummyjson.com/users?limit=${limit}&skip=${skip}`;
+            url = `${backendUrl}/users?limit=${limit}&skip=${skip}`;
         }
         const response = await fetch(url, { signal: fetchUsersController.signal });
         

@@ -9,6 +9,7 @@ const initialState: UsersState = {
     total: 0
 };
 
+// TODO: move to RTK Query if cache is needed
 const usersSlice = createSlice({
     name: 'users',
     initialState, 

@@ -9,6 +9,12 @@
     padding: 0;
 }
 
+.loaderCont {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%,0);
+}
+
 .error {
     color: #d9534f;
     background-color: #f2dede;
