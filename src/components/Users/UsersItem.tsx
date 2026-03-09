@@ -10,7 +10,7 @@ interface UsersItemProps {
 
 const UsersItem = ({ user, highlightText }: UsersItemProps) => {
     return (
-        <li className={styles.userItem}>
+        <div className={styles.userItem}>
             <SafeAvatar 
                 src={user.image}
                 alt={`${user.firstName} ${user.lastName}`} 
@@ -25,7 +25,7 @@ const UsersItem = ({ user, highlightText }: UsersItemProps) => {
                     <div>Phone: {user.phone}</div>
                 </div>
             </div>
-        </li>
+        </div>
     );
 };
 

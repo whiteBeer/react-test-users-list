@@ -60,11 +60,11 @@ const UsersContainer = ({ currentPage, currentQuery, onPageChange, onSearchChang
             {!error &&
                 <div style={{visibility: loading ? 'hidden' : 'visible'}}>
                     {users.length > 0 ? (
-                        <ul className={styles.list}>
+                        <div className={styles.list}>
                             {users.map((user) => (
                                 <UsersItem key={user.id} user={user} highlightText={currentQuery}/>
                             ))}
-                        </ul>
+                        </div>
                     ) : (
                         <p className={styles.notFound}>Users not found.</p>
                     )}
